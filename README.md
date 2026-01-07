@@ -1,4 +1,4 @@
-# RogueOS (Prototype v3.3 — ADOM skin + true tile movement)
+# RogueOS (Prototype v3.3 — Roguelike skin + true tile movement)
 
 - '@' now moves across floor tiles (not item-to-item). 
 - You descend on a directory tile '>'; ascend on the '<' tile near top-left.
@@ -8,7 +8,12 @@
 Run:
   python3 run.py /path/to/root
 
+<img width="1453" height="688" alt="image" src="https://github.com/user-attachments/assets/f5bba017-73d3-47d9-97e9-c50f3425bd87" />
+
 ## Web renderer (Three.js astral view)
+
+<img width="1919" height="877" alt="image" src="https://github.com/user-attachments/assets/416f45f0-9fff-438e-81f6-ba3a271cd7cf" />
+
 
 An experimental renderer that reuses the same roguefs core but surfaces the directory
 graph inside a Three.js scene:
