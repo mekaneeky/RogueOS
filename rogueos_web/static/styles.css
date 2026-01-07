@@ -1,0 +1,238 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: #010402;
+  color: #0aff9d;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  overflow: hidden;
+}
+
+canvas {
+  display: block;
+}
+
+#hud {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  right: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  z-index: 10;
+  pointer-events: none;
+}
+
+#breadcrumbs {
+  pointer-events: auto;
+  display: flex;
+  gap: 8px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 14px;
+  background: rgba(1, 4, 2, 0.7);
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(10, 255, 157, 0.35);
+  box-shadow: 0 0 18px rgba(10, 255, 157, 0.25);
+}
+
+#breadcrumbs span {
+  cursor: pointer;
+  color: #0aff9d;
+  opacity: 0.9;
+}
+
+#breadcrumbs span:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+#status {
+  pointer-events: auto;
+  min-width: 180px;
+  background: rgba(1, 4, 2, 0.7);
+  border-radius: 12px;
+  padding: 8px 12px;
+  border: 1px solid rgba(10, 255, 157, 0.2);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  opacity: 0.85;
+}
+
+#controls {
+  pointer-events: auto;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-left: auto;
+}
+
+button {
+  background: rgba(10, 255, 157, 0.15);
+  color: #0aff9d;
+  border: 1px solid rgba(10, 255, 157, 0.4);
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease, border 0.2s ease;
+  font-family: inherit;
+}
+
+button:hover {
+  background: rgba(10, 255, 157, 0.25);
+  border-color: rgba(10, 255, 157, 0.6);
+}
+
+button:active {
+  background: rgba(10, 255, 157, 0.4);
+}
+
+#search-input {
+  background: rgba(1, 4, 2, 0.85);
+  border: 1px solid rgba(10, 255, 157, 0.35);
+  border-radius: 8px;
+  padding: 6px 10px;
+  color: #0aff9d;
+  font-family: inherit;
+  min-width: 220px;
+}
+
+#info-panel {
+  position: fixed;
+  top: 50%;
+  right: 32px;
+  transform: translateY(-50%);
+  width: 320px;
+  max-width: calc(100vw - 64px);
+  background: rgba(1, 4, 2, 0.92);
+  border: 1px solid rgba(10, 255, 157, 0.4);
+  box-shadow: 0 0 24px rgba(10, 255, 157, 0.25);
+  border-radius: 16px;
+  padding: 16px 18px 18px 18px;
+  z-index: 12;
+  color: #0aff9d;
+  pointer-events: auto;
+}
+
+#info-panel.hidden {
+  display: none;
+}
+
+#loading-hint {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  z-index: 8;
+  color: #0aff9d;
+  font-family: 'IBM Plex Mono', monospace;
+  background: rgba(1, 4, 2, 0.9);
+}
+
+#loading-hint.hidden {
+  display: none;
+}
+
+#debug-log {
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  z-index: 14;
+  width: min(420px, 90vw);
+  max-height: 40vh;
+  overflow-y: auto;
+  background: rgba(1, 4, 2, 0.82);
+  border: 1px solid rgba(10, 255, 157, 0.3);
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  color: #0aff9d;
+  box-shadow: 0 0 18px rgba(10, 255, 157, 0.18);
+  pointer-events: none;
+  opacity: 0.92;
+}
+
+#debug-log pre {
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+#debug-log .log-entry {
+  border-bottom: 1px solid rgba(10, 255, 157, 0.12);
+  padding: 4px 0;
+}
+
+#debug-log .log-entry:last-child {
+  border-bottom: none;
+}
+
+#info-close {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font-size: 18px;
+  line-height: 1;
+  padding: 0;
+}
+
+#info-content h2 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffe2a9;
+}
+
+#info-content dl {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 8px 12px;
+  font-size: 14px;
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+#info-content dt {
+  opacity: 0.7;
+}
+
+#info-content dd {
+  margin: 0;
+}
+
+.search-results {
+  margin-top: 12px;
+  display: grid;
+  gap: 6px;
+}
+
+.search-item {
+  padding: 6px 8px;
+  background: rgba(1, 4, 2, 0.75);
+  border: 1px solid rgba(10, 255, 157, 0.2);
+  border-radius: 8px;
+  font-family: 'IBM Plex Mono', monospace;
+  cursor: pointer;
+}
+
+.search-item:hover {
+  border-color: rgba(10, 255, 157, 0.45);
+}
+
+.no-js-warning {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: #010402;
+  color: #0aff9d;
+  font-size: 18px;
+}

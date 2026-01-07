@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>RogueOS — Astral File Navigator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <div id="hud">
+      <div id="breadcrumbs"></div>
+      <div id="status"></div>
+      <div id="controls">
+        <button id="reset-view" title="Reset camera to default position">Reset View</button>
+        <input id="search-input" type="search" placeholder="Search (press ⏎)">
+      </div>
+    </div>
+    <div id="info-panel" class="hidden">
+      <button id="info-close" title="Close">×</button>
+      <div id="info-content"></div>
+    </div>
+    <div id="debug-log"></div>
+    <div id="loading-hint">
+      <strong>Initializing Astral Navigator…</strong>
+      <div>If this message remains, the desktop renderer failed to start.</div>
+      <div>Please check the terminal output for errors.</div>
+    </div>
+    <noscript>
+      <div class="no-js-warning">
+        RogueOS Astral viewer requires JavaScript to be enabled.
+      </div>
+    </noscript>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "./vendor/build/three.module.js"
+        }
+      }
+    </script>
+    <script type="module">
+      import { setupThreeGlobals } from './vendor/three-legacy-adapter.js';
+
+      setupThreeGlobals();
+      import('./app.js').catch((error) => {
+        console.error('Failed to bootstrap RogueOS Astral viewer', error);
+      });
+    </script>
+  </body>
+</html>

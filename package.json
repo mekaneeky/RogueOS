@@ -1,0 +1,12 @@
+{
+  "name": "rogueos",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "sync-three": "node scripts/sync_three_assets.mjs"
+  },
+  "dependencies": {
+    "three": "0.161.0"
+  }
+}
